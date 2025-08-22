@@ -2,7 +2,7 @@ import React from 'react'
 
 const CTA = () => {
   return (
-<div className="py-16 px-4">
+<div className="py-16 px-4 mt-25">
   <div className="max-w-7xl mx-auto">
     {/* Main CTA Container */}
     <div className="relative overflow-hidden border border-gray-200 rounded-2xl">

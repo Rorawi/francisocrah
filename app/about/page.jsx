@@ -82,7 +82,7 @@ const page = () => {
                         <div className="lg:col-span-2 space-y-6">
                             <div className='h-full border border-gray-200 bg-white p-5 rounded-xl'>
                                 <div className="space-y-2 mb-3 pb-3 text-left">
-                                    <h3 className="text-2xl font-semibold textShadow">About Me</h3>
+                                    <h3 className="text-xl font-semibold">About Me</h3>
                                 </div>
 
                                 <div className='text-left'>

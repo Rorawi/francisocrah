@@ -1,6 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bagel+Fat+One&display=swap');
+
 @import "tailwindcss";
 
-:root {
+
+/* :root {
   --background: #ffffff;
   --foreground: #171717;
 }
@@ -17,10 +21,63 @@
     --background: #0a0a0a;
     --foreground: #ededed;
   }
-}
+} */
+
+ :root {
+            --burgundy: #5C1E31;
+            --peach: #E5A077;
+            --sky-blue: #99CDF5;
+            --mint: #5CCDBF;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 3px;
+        }
 
 body {
-  background: var(--background);
+  /* background: var(--background); */
+  background-color: #f1f5f9;
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+    font-family: "Quicksand", sans-serif;
 }
+
+#foreground {
+    z-index: 10002;
+    position: fixed;
+    left: 50%;
+    transform: translate3d(-50%, 0, 0);
+    top: 10%;
+    width: 100%;
+    max-width: 640px;
+    margin: 0 auto;
+    background: hsla(160, 52%, 71%, .1);
+    backdrop-filter: blur(--64px);
+    box-shadow: var(--shadow-lg);
+}
+
+.font-bagel {
+    font-family: "Bagel Fat One", system-ui !important;
+}
+
+
+ .instagram-gradient {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+        }
+        
+        .story-ring {
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            padding: 2px;
+            border-radius: 50%;
+        }
+        
+        .glass-effect {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+        }

@@ -5,12 +5,12 @@ import React from 'react';
 function ProjectDisplay({ images, speed = 30000, direction = 'normal' }) {
   // Default images if none provided
   const defaultImages = [
-    { src: '/images/prophet.jpeg', alt: 'Project 1', title: 'Web Development' },
-    { src: '/images/flyer4.png', alt: 'Project 2', title: 'Mobile App' },
-    { src: '/images/theme1.jpeg', alt: 'Project 3', title: 'UI/UX Design' },
-    { src: '/images/kwesibelllogo.jpg', alt: 'Project 4', title: 'E-commerce' },
-    { src: '/images/70days.png', alt: 'Project 5', title: 'Dashboard' },
-    { src: '/images/lilian-logo.jpg', alt: 'Project 6', title: 'Landing Page' },
+    { src: '/images/prophet.jpeg', alt: 'Project 1' },
+    { src: '/images/flyer4.png', alt: 'Project 2' },
+    { src: '/images/theme1.jpeg', alt: 'Project 3' },
+    { src: '/images/kwesibelllogo.jpg', alt: 'Project 4' },
+    { src: '/images/70days.png', alt: 'Project 5' },
+    { src: '/images/lilian-logo.jpg', alt: 'Project 6' },
   ];
 
   const slideImages = images || defaultImages;

@@ -1,38 +1,72 @@
 "use client";
 
-import { FiCamera, FiMapPin, FiPlay, FiStar, FiTrendingUp } from "react-icons/fi";
+import React from 'react';
 
-function BentoGrid({ children }) {
+function ProjectDisplay({ images, speed = 30000, direction = 'normal' }) {
+  // Default images if none provided
+  const defaultImages = [
+    { src: '/images/prophet.jpeg', alt: 'Project 1', title: 'Web Development' },
+    { src: '/images/flyer4.png', alt: 'Project 2', title: 'Mobile App' },
+    { src: '/images/theme1.jpeg', alt: 'Project 3', title: 'UI/UX Design' },
+    { src: '/images/kwesibelllogo.jpg', alt: 'Project 4', title: 'E-commerce' },
+    { src: '/images/70days.png', alt: 'Project 5', title: 'Dashboard' },
+    { src: '/images/lilian-logo.jpg', alt: 'Project 6', title: 'Landing Page' },
+  ];
+
+  const slideImages = images || defaultImages;
+  
+  // Duplicate images for seamless loop
+  const duplicatedImages = [...slideImages, ...slideImages];
+
   return (
-    <div className="grid grid-cols-2 gap-2 md:gap-4 md:grid-cols-10">
-      {children}
-    </div>
+    <section className="py-10">
+      <div className="w-full overflow-hidden bg-transparent">
+        <div className="relative">
+          <div 
+            className="flex gap-4 animate-marquee"
+            style={{
+              animationDuration: `25000ms`,
+              animationDirection: direction,
+              animationPlayState: 'running',
+              width: 'max-content'
+            }}
+          >
+            {duplicatedImages.map((image, index) => (
+              <MarqueeCard key={index} item={image} />
+            ))}
+          </div>
+          
+          {/* Gradient overlays for fade effect */}
+          <div className="absolute top-0 left-0 w-32 h-full bg-gradient-to-r from-black via-black/50 to-transparent pointer-events-none z-10"></div>
+          <div className="absolute top-0 right-0 w-32 h-full bg-gradient-to-l from-black via-black/50 to-transparent pointer-events-none z-10"></div>
+        </div>
+      </div>
+    </section>
   );
 }
 
-function BentoCard({ item }) {
+function MarqueeCard({ item }) {
   return (
-    <div
-      className={
-        "group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur transition-all hover:shadow-lg hover:shadow-black/10 " +
-        (item.className ?? "")
-      }
-    >
-      {item.imgSrc && (
-        <div className="relative h-56 w-full md:h-full md:max-h-[400px] overflow-hidden">
+    <div className="group relative flex-shrink-0 w-80 h-80 overflow-hidden rounded-lg border border-white/10 bg-white/5 backdrop-blur transition-all hover:shadow-lg hover:shadow-black/10">
+      {item.src && (
+        <div className="relative h-full w-full overflow-hidden">
           <img
-            src={item.imgSrc}
-            alt={item.imgAlt || item.title}
+            src={item.src}
+            alt={item.alt || item.title}
             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
         </div>
       )}
-      <div className="pointer-events-none absolute inset-0 flex flex-col justify-between p-4 md:p-5">
-       
-        {item.footer && (
-          <div className="pointer-events-auto mt-3 flex flex-wrap gap-2 text-white">
-            {item.footer}
+      <div className="pointer-events-none absolute inset-0 flex flex-col justify-end p-4">
+        {(item.title || item.description) && (
+          <div className="text-white">
+            {item.title && (
+              <h3 className="font-semibold text-lg mb-1">{item.title}</h3>
+            )}
+            {item.description && (
+              <p className="text-sm text-white/80">{item.description}</p>
+            )}
           </div>
         )}
       </div>
@@ -40,77 +74,45 @@ function BentoCard({ item }) {
   );
 }
 
-export default function BentoGridDemo() {
-  const items = [
-    {
-      id: "hero",
-      title: "Explore Ghana's Coasts",
-      description: "Sunrise sessions and quiet shores along the Gulf of Guinea.",
-      imgSrc: "/images/prophet.jpeg",
-      className: "md:col-span-4",
-      badge: (
-        <span className="inline-flex items-center gap-2 rounded-full bg-black/40 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm">
-          <FiMapPin className="text-base" /> Featured
-        </span>
-      ),
-    },
-    {
-      id: "video",
-      title: "Short Reels",
-      description: "60‑second travel stories from locals.",
-      imgSrc: "/images/flyer4.png",
-      className: "md:col-span-2",
-      badge: <FiPlay className="text-2xl" />,
-    },
-    {
-      id: "editorial",
-      title: "Hidden Waterfalls",
-      description: "A photo essay through the eastern highlands.",
-      imgSrc: "/images/theme1.jpeg",
-      className: "md:col-span-4",
-      badge: <FiCamera className="text-2xl" />,
-    },
-    {
-      id: "ratings",
-      title: "Top‑Rated Guides",
-      description: "Handpicked experts for your next adventure.",
-      imgSrc: "/images/kwesibelllogo.jpg",
-      className: "md:col-span-2",
-      badge: <FiStar className="text-2xl" />,
-    },
-    {
-      id: "ratings",
-      title: "Top‑Rated Guides",
-      description: "Handpicked experts for your next adventure.",
-      imgSrc: "/images/70days.png",
-      className: "md:col-span-5",
-      badge: <FiStar className="text-2xl" />,
-    },
-    {
-      id: "ratings",
-      title: "Top‑Rated Guides",
-      description: "Handpicked experts for your next adventure.",
-      imgSrc: "/images/lilian-logo.jpg",
-      className: "md:col-span-3",
-      badge: <FiStar className="text-2xl" />,
-    }
+// Alternative version with pause on hover
+function MarqueeSliderWithPause({ images, speed = 30000, direction = 'normal' }) {
+  const defaultImages = [
+    { src: '/images/prophet.jpeg', alt: 'Project 1', title: 'Web Development', description: 'Modern React application' },
+    { src: '/images/flyer4.png', alt: 'Project 2', title: 'Mobile App', description: 'Cross-platform solution' },
+    { src: '/images/theme1.jpeg', alt: 'Project 3', title: 'UI/UX Design', description: 'User-centered approach' },
+    { src: '/images/kwesibelllogo.jpg', alt: 'Project 4', title: 'E-commerce', description: 'Full-stack platform' },
+    { src: '/images/70days.png', alt: 'Project 5', title: 'Dashboard', description: 'Data visualization' },
+    { src: '/images/lilian-logo.jpg', alt: 'Project 6', title: 'Landing Page', description: 'High conversion design' },
   ];
+
+  const slideImages = images || defaultImages;
+  const duplicatedImages = [...slideImages, ...slideImages];
 
   return (
     <section className="px-4 py-10">
-      {/* <header className="mb-6 flex items-end justify-between">
-        <div>
-          <h2 className="text-2xl font-bold md:text-3xl">Bento</h2>
-          <p className="text-sm text-white/60">
-            Image-forward grid with optional react-icons.
-          </p>
+      <div className="w-full overflow-hidden bg-transparent">
+        <div className="relative group">
+          <div 
+            className="flex gap-2 animate-marquee group-hover:animation-paused"
+            style={{
+              animationDuration: `${speed}ms`,
+              animationDirection: direction,
+              width: 'max-content'
+            }}
+          >
+            {duplicatedImages.map((image, index) => (
+              <MarqueeCard key={index} item={image} />
+            ))}
+          </div>
+          
+          {/* Gradient overlays for fade effect */}
+          <div className="absolute top-0 left-0 w-32 h-full bg-gradient-to-r from-black via-black/50 to-transparent pointer-events-none z-10"></div>
+          <div className="absolute top-0 right-0 w-32 h-full bg-gradient-to-l from-black via-black/50 to-transparent pointer-events-none z-10"></div>
         </div>
-      </header> */}
-      <BentoGrid>
-        {items.map((item) => (
-          <BentoCard key={item.id} item={item} />
-        ))}
-      </BentoGrid>
+      </div>
     </section>
   );
 }
+
+export default ProjectDisplay;
+export {  MarqueeSliderWithPause };

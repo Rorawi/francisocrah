@@ -35,7 +35,7 @@ const SelectedWorkExperience = () => {
   }
 ];
   return (
-        <div className="max-w-7xl px-4 mx-auto">
+        <div className="max-w-7xl px-4 mx-auto relative z-10">
 {/* Work Experience Section */}
 <div className="space-y-6">
   <div className="text-center">
@@ -46,7 +46,7 @@ Selected Work Experience</h2>
   
   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
     {workExperience.map((work, index) => (
-      <div key={index} className="h-full hover:shadow-lg transition-shadow duration-300 rounded-lg bg-card text-card-foreground border border-gray-200">
+      <div key={index} className="h-full bg-white hover:shadow-lg transition-shadow duration-300 rounded-lg bg-card text-card-foreground border border-gray-200">
         <div className="flex flex-col space-y-1.5 p-6">
           <div className="flex items-center gap-3 mb-2">
             <div className={`p-2 bg-${work.color}-100 rounded-lg text-${work.color}-600`}>

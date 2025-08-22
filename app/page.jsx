@@ -24,6 +24,7 @@ export default function Home() {
 <Hero />
 <ProjectsDisplay />
 <SelectedWorkExperience className=" pt-[150px]" />
+ {/* <ContentCreationStoryTelling /> */}
 <CoreSkills />
 <CTA />
 <Footer />
